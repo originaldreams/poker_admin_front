@@ -8,7 +8,10 @@ module.exports = {
         '/api': {
           target: '127.0.0.1:8080',
           ws: true,
-          changeOrigin: true
+          changeOrigin: true,
+          pathRewite: {
+            '^/api': ''
+          }
         },
       }
     }

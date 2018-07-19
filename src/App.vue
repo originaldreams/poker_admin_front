@@ -1,20 +1,117 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <el-container>
+      <el-header>
+
+        <el-menu
+          class="el-menu-demo"
+          mode="horizontal"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b">
+          
+          <el-menu-item index="2">退出登录</el-menu-item>
+        </el-menu>
+
+
+      </el-header>
+      <el-container id="leftContainer">
+        <el-aside width="180px">
+
+            <el-menu
+              default-active="2"
+              class="el-menu-vertical-demo"
+              
+              background-color="#545c64"
+              text-color="#fff"
+              active-text-color="#ffd04b">
+
+              <el-submenu index="1">
+                <template slot="title">
+                  <i class="el-icon-location"></i>
+                  <span>用户中心</span>
+                </template>
+                <el-menu-item-group>
+                  <template slot="title"></template>
+                  <el-menu-item index="1-1">用户信息</el-menu-item>
+                  <el-menu-item index="1-2">重置密码</el-menu-item>
+                </el-menu-item-group>
+                
+              </el-submenu>
+
+              <el-submenu index="1" disabled>
+                <template slot="title">
+                  <i class="el-icon-location"></i>
+                  <span>用户管理</span>
+                </template>
+                <el-menu-item-group>
+                  <template slot="title"></template>
+                  <el-menu-item index="1-1">查询用户</el-menu-item>
+                  <el-menu-item index="1-2">查询用户登录记录</el-menu-item>
+                </el-menu-item-group>
+              </el-submenu>
+
+              <el-submenu index="1" disabled>
+                <template slot="title">
+                  <i class="el-icon-location"></i>
+                  <span>权限管理</span>
+                </template>
+                <el-menu-item-group>
+                  <template slot="title"></template>
+                  <el-menu-item index="1-1">查询角色</el-menu-item>
+                  <el-menu-item index="1-2">查询权限</el-menu-item>
+                </el-menu-item-group>
+              </el-submenu>
+
+              <el-submenu index="1" disabled>
+                <template slot="title">
+                  <i class="el-icon-location"></i>
+                  <span>邮件管理</span>
+                </template>
+                <el-menu-item-group>
+                  <template slot="title"></template>
+                  <el-menu-item index="1-1">邮件发送记录</el-menu-item>
+                  <!-- <el-menu-item index="1-2">重置密码</el-menu-item> -->
+                </el-menu-item-group>
+                
+              </el-submenu>
+
+            </el-menu>
+
+          <!-- <div id="nav">
+            <ul>
+              <li><router-link to="/task">任务</router-link></li>
+              <li><router-link to="/taskResult">任务结果</router-link></li>
+              <li><router-link to="/taskConfig">任务配置</router-link></li>
+            </ul>
+            
+          </div> -->
+
+        </el-aside>
+        <el-main>
+          <div id="main">
+            <router-view/>
+          </div>
+        </el-main>
+      </el-container>
+    </el-container>
+
+
+
+    
   </div>
 </template>
+<style scoped>
 
-<style>
+#leftContainer {
+  margin: 20px;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  /* font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 60px; */
 }
 </style>
