@@ -3,11 +3,21 @@
   <div>
     <el-form>
       <el-form-item label="用户名：">
+
         {{ userForm.userName }}
       </el-form-item>
 
       <el-form-item label="昵称：">
-        {{ userForm.nickName }}
+        <div v-if="nickNameSwitch">
+          {{ userForm.nickName }}
+        </div>
+
+        <div v-else>
+          <el-input v-model="userForm.nickName" class="nickNameInput" placeholder="昵称"></el-input>
+          <el-button type="primary">修改</el-button>
+          <el-button>取消</el-button>
+        </div>
+        
       </el-form-item>
 
       <el-form-item label="性别：">
@@ -33,8 +43,12 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 
+.nickNameInput {
+  width: 200px;
+  margin-right: 15px;
+}
 </style>
 
 <script>
@@ -51,6 +65,9 @@ export default {
         email: "demo@demo.com",
         registerDate: "2018-10-26"
       },
+      nickNameSwitch: false,
+      mobileSwitch: true,
+      emailSwitch: true,
     }
   }
 }
