@@ -16,12 +16,12 @@
 
       </el-header>
       <el-container id="leftContainer">
-        <el-aside width="180px">
+        <el-aside width="200px">
 
             <el-menu
               default-active="2"
               class="el-menu-vertical-demo"
-              
+              :router="true"
               background-color="#545c64"
               text-color="#fff"
               active-text-color="#ffd04b">
@@ -33,8 +33,8 @@
                 </template>
                 <el-menu-item-group>
                   <template slot="title"></template>
-                  <el-menu-item index="1-1">用户信息</el-menu-item>
-                  <el-menu-item index="1-2">重置密码</el-menu-item>
+                  <el-menu-item index="/userInformation">用户信息</el-menu-item>
+                  <el-menu-item index="/resetPassword">重置密码</el-menu-item>
                 </el-menu-item-group>
                 
               </el-submenu>
@@ -78,10 +78,10 @@
 
             </el-menu>
 
-          <!-- <div id="nav">
+          <!-- <div id="nav" style="float: right">
             <ul>
-              <li><router-link to="/task">任务</router-link></li>
-              <li><router-link to="/taskResult">任务结果</router-link></li>
+              <li><router-link to="/userCenter/information">任务</router-link></li>
+              <li><router-link to="/userCenter/resetPassword">任务结果</router-link></li>
               <li><router-link to="/taskConfig">任务配置</router-link></li>
             </ul>
             
@@ -90,15 +90,12 @@
         </el-aside>
         <el-main>
           <div id="main">
-            <router-view/>
+            <router-view></router-view>
           </div>
         </el-main>
       </el-container>
     </el-container>
 
-
-
-    
   </div>
 </template>
 <style scoped>

@@ -3,7 +3,7 @@ import Router from 'vue-router'
 // import Home from './views/Home.vue'
 // import About from './views/About.vue'
 import UserInformation from './views/userCenter/UserInformation.vue'
-import { ResetPassword } from "./views/userCenter/ResetPassword.vue";
+import ResetPassword from './views/userCenter/ResetPassword.vue'
 
 Vue.use(Router)
 
@@ -12,25 +12,17 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/userCenter'
+      redirect: '/userInformation'
     },
     {
-      path: '/userCenter',
-      redirect: '/userCenter/information',
-      children: [
-        {
-          path: 'information',
-          name: 'userInformation',
-          component: UserInformation
-        },
-        {
-          path: 'resetPassword',
-          name: 'resetPassword',
-          component: ResetPassword
-        },
-
-      ]
+      path: '/userInformation',
+      component: UserInformation,
     },
+    {
+      path: '/resetPassword',
+      component: ResetPassword
+    }
+
     // {
     //   path: '/about',
     //   name: 'about',
