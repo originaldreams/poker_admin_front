@@ -2,7 +2,13 @@
 <template>
   <div>
     <h2>用户资料</h2>
-    12312312
+    <div>
+      <img src="../../assets/logo.png" class="round_icon" alt="">
+    </div>
+    <!-- 表单 -->
+    <div>
+      <user-information-form></user-information-form>
+    </div>
   </div>
 </template>
 
@@ -21,3 +27,17 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+.round_icon{
+  width: 64px;
+  height: 64px;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+</style>
