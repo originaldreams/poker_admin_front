@@ -1,23 +1,28 @@
 <!-- -->
 <template>
-  <div>
+  <div class="resetPassword">
       <h2>重置密码</h2>
-      ssssss
+      <reset-password-route></reset-password-route>
   </div>
 </template>
 
-<style>
+<style scoped>
+
+.resetPassword {
+  margin: -20px 20px 20px 40px;
+}
 
 </style>
 
+
 <script>
 // @ is an alias to /src
-import ResetPasswordForm from '@/components/userCenter/ResetPasswordForm.vue'
+import ResetPasswordRoute from '@/components/userCenter/ResetPasswordRoute.vue'
 
 export default {
   name: '',
   components: {
-    ResetPasswordForm
+    ResetPasswordRoute
   }
 }
 </script>
