@@ -56,7 +56,7 @@
 export default {
   data() {
     return {
-      imageUrl: false
+      imageUrl: 'https://www.w3schools.com/howto/img_avatar.png'
     }
   },
 
