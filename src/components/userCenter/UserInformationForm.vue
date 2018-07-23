@@ -1,6 +1,6 @@
 <!-- 查看用户信息表单，支持修改 -->
 <template>
-  <div>
+  <div class="form">
     <el-form>
       <el-form-item label="用户名：">
 
@@ -9,7 +9,7 @@
 
       <el-form-item label="昵称：">
         <div v-if="nickNameSwitch">
-          <a @click="nickNameSwitch=false">{{ userForm.nickName }}</a>
+          <a @click="nickNameSwitch=false" class="modifiedLabel">{{ userForm.nickName }}</a>
           
         </div>
 
@@ -27,7 +27,7 @@
 
       <el-form-item label="生日：">
         <div v-if="birthdaySwitch">
-          <a @click="birthdaySwitch=false">
+          <a @click="birthdaySwitch=false" class="modifiedLabel">
             {{ userForm.birthday }}
           </a>
         </div>
@@ -49,7 +49,7 @@
 
       <el-form-item label="手机号：">
         <div v-if="mobileSwitch">
-          <a @click="mobileSwitch=false">{{ userForm.mobile }}</a>
+          <a @click="mobileSwitch=false" class="modifiedLabel">{{ userForm.mobile }}</a>
 
         </div>
         <div v-else>
@@ -62,7 +62,7 @@
 
       <el-form-item label="邮箱：">
         <div v-if="emailSwitch">
-          <a @click="emailSwitch=false">{{ userForm.email }}</a>
+          <a @click="emailSwitch=false" class="modifiedLabel">{{ userForm.email }}</a>
           
         </div>
 
@@ -83,6 +83,13 @@
 
 <style scoped>
 
+.modifiedLabel {
+  color: blue;
+}
+
+.form {
+  margin: 20px 20px 20px 0px;
+}
 .nickNameInput {
   width: 200px; 
   margin-right: 15px;
