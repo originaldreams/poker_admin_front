@@ -9,13 +9,14 @@
 
       <el-form-item label="昵称：">
         <div v-if="nickNameSwitch">
-          {{ userForm.nickName }}
+          <a @click="nickNameSwitch=false">{{ userForm.nickName }}</a>
+          
         </div>
 
         <div v-else>
-          <el-input v-model="userForm.nickName" class="nickNameInput" placeholder="昵称"></el-input>
-          <el-button type="primary">修改</el-button>
-          <el-button>取消</el-button>
+          <el-input v-model="userForm.nickName" class="input nickNameInput" placeholder="昵称"></el-input>
+          <el-button type="primary" size="medium">修改</el-button>
+          <el-button size="medium" @click="nickNameSwitch=true">取消</el-button>
         </div>
         
       </el-form-item>
@@ -25,15 +26,52 @@
       </el-form-item>
 
       <el-form-item label="生日：">
-        {{ userForm.birthday }}
+        <div v-if="birthdaySwitch">
+          <a @click="birthdaySwitch=false">
+            {{ userForm.birthday }}
+          </a>
+        </div>
+
+        <div v-else>
+          <el-date-picker
+            v-model="userForm.birthday"
+            type="date"
+            placeholder="选择日期"
+            value-format="yyyy-MM-dd"
+            class="datePicker">
+          </el-date-picker>
+          <el-button type="primary" size="medium">修改</el-button>
+          <el-button size="medium" @click="birthdaySwitch=true">取消</el-button>
+        </div>
+
+      
       </el-form-item>
 
       <el-form-item label="手机号：">
-        {{ userForm.mobile }}
+        <div v-if="mobileSwitch">
+          <a @click="mobileSwitch=false">{{ userForm.mobile }}</a>
+
+        </div>
+        <div v-else>
+          <el-input v-model="userForm.mobile" class="input mobileInput" placeholder="昵称"></el-input>
+          <el-button type="primary" size="medium">修改</el-button>
+          <el-button size="medium" @click="mobileSwitch=true">取消</el-button>
+        </div>
+        
       </el-form-item>
 
       <el-form-item label="邮箱：">
-        {{ userForm.email }}
+        <div v-if="emailSwitch">
+          <a @click="emailSwitch=false">{{ userForm.email }}</a>
+          
+        </div>
+
+        <div v-else>
+          <el-input v-model="userForm.email" class="input emailInput" placeholder="昵称"></el-input>
+          <el-button type="primary" size="medium">修改</el-button>
+          <el-button size="medium" @click="emailSwitch=true">取消</el-button>
+        </div>
+        
       </el-form-item>
 
       <el-form-item label="注册时间:">
@@ -46,15 +84,34 @@
 <style scoped>
 
 .nickNameInput {
-  width: 200px;
+  width: 200px; 
   margin-right: 15px;
+}
+
+.mobileInput {
+  width: 150px; 
+  margin-right: 15px;
+}
+
+.emailInput {
+  width: 300px; 
+  margin-right: 15px;
+}
+
+.datePicker {
+  width: 130px;
+  margin-right: 15px;
+}
+.input {
+  /* width: 200px; */
+  /* margin-right: 15px; */
 }
 </style>
 
 <script>
 
 export default {
-  data() {
+  data: function() {
     return {
       userForm: {
         userName: "mamian",
@@ -65,10 +122,17 @@ export default {
         email: "demo@demo.com",
         registerDate: "2018-10-26"
       },
-      nickNameSwitch: false,
+      nickNameSwitch: true,
       mobileSwitch: true,
       emailSwitch: true,
+      birthdaySwitch: true
     }
-  }
+  },
+
+  methods: {
+    clicktest: function() {
+      
+    }
+  },
 }
 </script>
