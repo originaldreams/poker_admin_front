@@ -1,9 +1,9 @@
 <template>
   <div>
-    1231232132321
-    <div>
-      {{ category }}
-    </div>
+    <el-form>
+      <el-form-item label="验证码">
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
