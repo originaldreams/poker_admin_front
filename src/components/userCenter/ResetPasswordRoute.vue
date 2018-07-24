@@ -1,27 +1,25 @@
 <!-- 重置密码 email和mobile公用组件 -->
 <template>
   <div >
-    <div class="mobileLabel">
-      <div v-if="mobileCheckingSwitch">
-        <a >手机号验证</a>
+    <div v-if="checkingSwitch">
+      <div class="mobileLabel">
+        <div >
+          <router-link :to="{ name: 'resetPasswordForMobile', params: {category: 'MOBILE'} }"  @click.native="checkingSwitch=false">手机号验证</router-link>
+        </div>
+
       </div>
-      <div v-else>
-        <!-- 内容 -->
-        <reset-password-form type="MOBILE_TYPE"></reset-password-form>
+      <div class="emailLabel">
+        <div >
+          <router-link :to="{ name: 'resetPasswordForEmail', params: {category: 'EMAIL'} }" @click.native="checkingSwitch=false">邮箱验证</router-link>
+        </div>
+
       </div>
-      
-      
-      
+
     </div>
-    <div class="emailLabel">
-      <div v-if="emailCheckingSwitch">
-        <a >邮箱验证</a>
-      </div>
-      <div v-else>
-        <reset-password-form type="EMAIL_TYPE"></reset-password-form>
-      </div>
-      
+    <div v-else>
+      <router-view></router-view>
     </div>
+
     
   </div>
 </template>
@@ -54,6 +52,7 @@ export default {
     return {
       mobileCheckingSwitch: true,
       emailCheckingSwitch: true,
+      checkingSwitch: true,
       MOBILE_TYPE: MOBILE_TYPE,
       EMAIL_TYPE: EMAIL_TYPE
     }

@@ -1,6 +1,9 @@
 <template>
   <div>
-
+    1231232132321
+    <div>
+      {{ category }}
+    </div>
   </div>
 </template>
 
@@ -16,16 +19,20 @@ export default {
      * MOBILE EMAIL 
      * 根据传入的类型，判断是根据哪种方式去修改密码
      */
-    type: String
+    category: String
   },
+
+  // props: ['type'],
   data() {
     return {
-
     }
   },
 
   methods: {
 
+  },
+
+  mounted() {
   }
 }
 </script>
