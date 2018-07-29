@@ -8,16 +8,17 @@
                   v-for="item in loginOptions"
                   :key="item.value"
                   :label="item.label"
-                  :value="item.value">
+                  :value="item.value"
+                  :disabled="item.disabled">
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="用户名" prop="username">
-                <el-input v-model="LoginForm.username" class="input"></el-input>
+              <el-input v-model="LoginForm.username" class="input"></el-input>
             </el-form-item>
 
             <el-form-item label="密码" prop="password">
-                <el-input v-model="LoginForm.password" class="input" type="password"></el-input>
+              <el-input v-model="LoginForm.password" class="input" type="password"></el-input>
             </el-form-item>
 
             <el-form-item>
@@ -40,8 +41,8 @@ import "url-search-params-polyfill";
 
 const LOGIN_OPTIONS = [
   {value: 'loginWithUserName', label: '用户名登录'},
-  {value: 'logonWithPhone', label: '手机号登录'},
-  {value: 'logonWithEmail', label: 'Email登录'}
+  {value: 'logonWithPhone', label: '手机号登录', disabled: true},
+  {value: 'logonWithEmail', label: 'Email登录', disabled: true}
 ]
 
 const SESSION_ID = "sessionid";
@@ -63,9 +64,12 @@ export default {
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" }
         ],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          { min: 6, message: "密码至少需要输入6位", trigger: "blur" }
+        ]
       },
-      loginType: LOGIN_OPTIONS[1].value,
+      loginType: LOGIN_OPTIONS[0].value,
       loginOptions: LOGIN_OPTIONS
     };
   
