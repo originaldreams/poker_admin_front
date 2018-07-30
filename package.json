@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "element-ui": "^2.3.6",
+    "url-search-params-polyfill": "^4.0.1",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1"
   },
