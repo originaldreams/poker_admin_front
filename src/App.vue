@@ -34,6 +34,7 @@
                 <el-menu-item-group>
                   <template slot="title"></template>
                   <el-menu-item index="/userInformation">用户信息</el-menu-item>
+                  <!-- TODO 重置属性 -->
                   <el-menu-item index="/resetPassword">重置密码</el-menu-item>
                 </el-menu-item-group>
                 
