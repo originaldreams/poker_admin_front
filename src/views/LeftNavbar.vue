@@ -21,31 +21,31 @@
       
     </el-submenu>
 
-    <el-submenu index="1" disabled>
+    <el-submenu index="2" >
       <template slot="title">
         <i class="el-icon-location"></i>
         <span>用户管理</span>
       </template>
       <el-menu-item-group>
         <template slot="title"></template>
-        <el-menu-item index="1-1">查询用户</el-menu-item>
+        <el-menu-item index="/user/list" >查询用户</el-menu-item>
         <el-menu-item index="1-2">查询用户登录记录</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
 
-    <el-submenu index="1" disabled>
+    <el-submenu index="3" >
       <template slot="title">
         <i class="el-icon-location"></i>
         <span>权限管理</span>
       </template>
       <el-menu-item-group>
         <template slot="title"></template>
-        <el-menu-item index="1-1">查询角色</el-menu-item>
-        <el-menu-item index="1-2">查询权限</el-menu-item>
+        <el-menu-item index="/role/list">查询角色</el-menu-item>
+        <el-menu-item index="/router/list">查询权限</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
 
-    <el-submenu index="1" disabled>
+    <el-submenu index="4" disabled>
       <template slot="title">
         <i class="el-icon-location"></i>
         <span>邮件管理</span>
@@ -64,19 +64,14 @@
 
 
 <style scoped>
-
 </style>
 
 <script>
 export default {
   data() {
-    return {
-
-    }
+    return {};
   },
 
-  methods: {
-    
-  }
-}
+  methods: {}
+};
 </script>
