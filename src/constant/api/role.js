@@ -1,6 +1,7 @@
 import {apiBase}  from './apiBase';
-export const ROLE_URL=apiBase()+'/';
+export const ROLE_URL=apiBase()+'/api';
 
 export default {
-"USER_MANAGER_PERMISSION_GET_ALL_ROLES":ROLE_URL+"?methodName=USER_MANAGER_PERMISSION_GET_ALL_ROLES"
+    //获取角色信息列表
+userManagerPermissionGetAllRoles:ROLE_URL+"?methodName=USER_MANAGER_PERMISSION_GET_ALL_ROLES"
 }
