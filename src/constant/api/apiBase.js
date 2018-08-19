@@ -1,7 +1,7 @@
-export const localHostApi = 'http://127.0.0.1:8000/api';
+export const localHostApi = 'http://localhost:8013';
 
 
-export const onlineHostApi = 'http//example.com/api';
+export const onlineHostApi = 'http://132.232.2.225:8805';
 
 export const hostApi = '/api';
 
@@ -13,6 +13,7 @@ const ONLINE = 'example';
 
 
 export function apiBase() {
+    return localHostApi;
     let hostname = window.location.hostname;
     let API_BASE_URL = '';
     

@@ -82,7 +82,6 @@
 </template>
 
 <style scoped>
-
 .modifiedLabel {
   color: blue;
 }
@@ -91,17 +90,17 @@
   margin: 20px 20px 20px 0px;
 }
 .nickNameInput {
-  width: 200px; 
+  width: 200px;
   margin-right: 15px;
 }
 
 .mobileInput {
-  width: 150px; 
+  width: 150px;
   margin-right: 15px;
 }
 
 .emailInput {
-  width: 300px; 
+  width: 300px;
   margin-right: 15px;
 }
 
@@ -116,7 +115,6 @@
 </style>
 
 <script>
-
 export default {
   data: function() {
     return {
@@ -133,13 +131,11 @@ export default {
       mobileSwitch: true,
       emailSwitch: true,
       birthdaySwitch: true
-    }
+    };
   },
 
   methods: {
-    clicktest: function() {
-      
-    }
-  },
-}
+    clicktest: function() {}
+  }
+};
 </script>
