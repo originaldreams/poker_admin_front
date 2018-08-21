@@ -43,7 +43,7 @@
             <el-table-column prop="regeditTime" label="注册时间"></el-table-column>
 
         </el-table>
-        <el-pagination layout="total,sizes,prev,pager,next,jumper" background="true" pager-count="7" :page-sizes="[10,20,30,50,100]" :page-size="20" :total="50">
+        <el-pagination layout="total,sizes,prev,pager,next,jumper" :background="true" :pager-count="7" :page-sizes="[10,20,30,50,100]" :page-size="20" :total="50">
         </el-pagination>
     </div>
 </template>
