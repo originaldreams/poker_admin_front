@@ -62,8 +62,7 @@
             initPage() {
                 this.$http.post(roleApi.USER_MANAGER_PERMISSION_GET_ALL_ROLES,
                     {}).then(function (data) {
-                    console.log(data);
-
+                        console.log(data)
                 })
             },
             //显示权限选择框
