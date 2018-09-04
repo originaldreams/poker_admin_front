@@ -1,5 +1,5 @@
 <template>
-    <div v-show="showTrans">
+    <div >
         <el-transfer v-model="roleRouters" :data="routers" :props="{
       key: 'id',
       label: 'serviceName'
@@ -24,8 +24,6 @@
                 type: Object,
                 default: null
             },
-            //是否显示
-            showTrans: {default: false},
         },
         components: {
             ElButton,
@@ -40,7 +38,7 @@
             init() {
                 let vm = this
                 if (vm.role) {
-                    axios.get(router_url.userPanagerPermissionGetAllRouters).then(function (data) {
+                    axios.get(router_url.userManagerPermissionGetAllRouters).then(function (data) {
 
                         vm.routers = data
 
@@ -54,6 +52,7 @@
             //提交数据
             submit() {
                 console.log(JSON.stringify(this.role));
+                self.$emit('close-dialog');
             }
         }
     }
