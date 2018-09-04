@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div style=" background-color:#545c64;height: 740px;">
     <el-menu
     default-active="2"
     class="el-menu-vertical-demo"
@@ -64,6 +64,8 @@
 
 
 <style scoped>
+  .el-menu-vertical-demo{
+  }
 </style>
 
 <script>

@@ -1,33 +1,58 @@
 <template>
-    <div v-show="showTrans">
-            <el-transfer v-model="roleRouters" :data="routers"></el-transfer>
+    <div >
+        <el-transfer v-model="roleRouters" :data="routers" :props="{
+      key: 'id',
+      label: 'serviceName'
+    }"></el-transfer>
         <el-button type="pirmary" @click="submit">确认</el-button>
     </div>
 </template>
 <script>
     import ElDialog from "../../../../node_modules/element-ui/packages/dialog/src/component.vue";
     import ElButton from "../../../../node_modules/element-ui/packages/button/src/button.vue";
+    import router_url from "../../../constant/api/router"
 
     export default {
-        components: {
-            ElButton,
-            ElDialog},
-        props: {routers: Array,
-            role:{
-             default:{}
-            },
-            //是否显示
-            showTrans:{default:false},
-        },
         data() {
             return {
-                roleRouters: [1,2]
+                roleRouters: [1, 2],
+                routers: []
             }
         },
-        methods:{
+        props: {
+            role: {
+                type: Object,
+                default: null
+            },
+        },
+        components: {
+            ElButton,
+            ElDialog
+        },
+
+
+        mounted() {
+            this.init();
+        },
+        methods: {
+            init() {
+                let vm = this
+                if (vm.role) {
+                    axios.get(router_url.userManagerPermissionGetAllRouters).then(function (data) {
+
+                        vm.routers = data
+
+                    })
+
+                }
+                if (vm.id) {
+
+                }
+            },
             //提交数据
-            submit(){
+            submit() {
                 console.log(JSON.stringify(this.role));
+                self.$emit('close-dialog');
             }
         }
     }

@@ -33,7 +33,6 @@
 
 <script>
     import {setCookie, getCookie} from "@/utils/cookie";
-
     import auth_url from "@/constant/api/auth";
 
     import "url-search-params-polyfill";
@@ -93,38 +92,26 @@
             login: function () {
                 let self = this;
                 let loginParams = new URLSearchParams(this.LoginForm);
-                this.$http.post('/api/logon',
+                axios.post(auth_url.loginWithUserName,
                     loginParams
-                )
-                    .then(response => {
-                        self.$message({
-                            showClose: true,
-                            message: "登录成功",
-                            type: "success"
-                        });
-
-                        //写入 Cookies
-                        setCookie(SESSION_ID, response.data.session_key, {
-                            expires: SESSION_EXPIRE_DAY
-                        });
-                        localStorage.setItem("sessionid", response.data.session_key);
-                        let redirect = decodeURIComponent(self.$route.query.redirect || "/");
-                        //跳转
-                        self.$router.push({path: redirect}); //登录成功之后重定向到首页
-                        this.$router.push("/");
-
-                        // 线上会自动写入 cookie  和 csrf token
-                        // setCookie(SESSION_ID, response.data.session_key, SESSION_EXPIRE_DAY);
-                        // auth = true;
-                    })
-
-                    .catch(error => {
-                        self.$message({
-                            showClose: true,
-                            message: error.message,
-                            type: "error"
-                        });
+                ).then(response => {
+                    self.$message({
+                        showClose: true,
+                        message: "登录成功",
+                        type: "success"
                     });
+                    //写入 Cookies
+                   setCookie(SESSION_ID, response.session_key, {
+                        expires: SESSION_EXPIRE_DAY
+                    });
+                   // localStorage.setItem("sessionid", response.session_key);
+                   // let redirect = decodeURIComponent(self.$route.query.redirect || "/");
+                    //跳转
+                    //self.$router.push({path: redirect}); //登录成功之后重定向到首页
+                    self.$router.push("/");
+
+                })
+
             }
         }
     };
@@ -132,19 +119,6 @@
 
 <style scored>
     .loginForm {
-        /* 居中 */
-        /* position: absolute;
-              top: 20%;
-              left: 50%;
-              -webkit-transform: translate(-50%, -50%);
-              -moz-transform: translate(-50%, -50%);
-              -ms-transform: translate(-50%, -50%);
-              -o-transform: translate(-50%, -50%);
-              transform: translate(-50%, -50%); */
-        /* top: 50%;
-              left: 25%;
-              width: 400px;
-              height: 250px; */
         width: 400px;
         height: 300px;
         position: absolute;
