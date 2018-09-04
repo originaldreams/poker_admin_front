@@ -11,7 +11,7 @@
             <el-table-column prop="requestMethod" label="请求方式"></el-table-column>
 
         </el-table>
-        <el-pagination layout="total,sizes,prev,pager,next,jumper" background="true" pager-count="7" :page-sizes="[10,20,30,50,100]" :page-size="20" :total="50">
+        <el-pagination layout="total,sizes,prev,pager,next,jumper" :background="true" :pager-count="7" :page-sizes="[10,20,30,50,100]" :page-size="20" :total="50">
         </el-pagination>
     </div>
 </template>

@@ -13,7 +13,7 @@ import RouterList from './views/roleManage/router/list.vue'
 import RoleList from './views/roleManage/role/list.vue'
 
 Vue.use(Router)
-const router= new Router({
+const router = new Router({
     mode: 'history',
     routes: [{
         path: '/',
@@ -69,21 +69,23 @@ const router= new Router({
 })
 
 
-const SESSION_ID = "sessionid";
-router.beforeEach((to,from,next)=>{
-    if(to.matched.some(record=>record.meta.requiresAuth)){
-        if(getCookie(SESSION_ID))
+//const SESSION_ID = "sessionid";
+router.beforeEach((to, from, next) => {
+    next();
+    return
+    /*if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (getCookie(SESSION_ID))
             next()
         else
             next({
-                path:"/login",
-                query:{
-                    redirect:to.fullPath
+                path: "/login",
+                query: {
+                    redirect: to.fullPath
                 }
             })
-    }else {
+    } else {
         next();
-    }
+    }*/
 
 })
 export default router;

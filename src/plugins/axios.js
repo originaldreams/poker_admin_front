@@ -30,7 +30,6 @@ _axios.interceptors.request.use(
 // Add a response interceptor
 _axios.interceptors.response.use(
     function (response) {
-        console.log(response)
         if (response.status == 200) {
             let data = response.data;
             if (data.success == 0)
