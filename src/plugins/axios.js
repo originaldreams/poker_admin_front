@@ -30,11 +30,28 @@ _axios.interceptors.request.use(
 // Add a response interceptor
 _axios.interceptors.response.use(
     function (response) {
-        console.log(response)
         if (response.status == 200) {
             let data = response.data;
-            if (data.success == 0)
-                return data.data;
+            console.log(JSON.stringify(data))
+            switch (data.success) {
+                case 0:
+                    return data.data;
+                    break;
+                case 1:
+                    Message({
+                        showClose: true,
+                        message: data.message,
+                        type: "error"
+                    })
+                    break;
+                default:
+                    Message({
+                        showClose: true,
+                        message: "未知状态",
+                        type: "error"
+                    });
+                    break;
+            }
         }
 
     },
@@ -52,15 +69,15 @@ _axios.interceptors.response.use(
                 case 403:
                     Message({
                         showClose: true,
-                        message: response.data.message
-                        , type: 'error'
+                        message: response.data.message,
+                        type: 'error'
                     })
                     break;
                 default:
                     Message({
                         showClose: true,
-                        message: '未知错误'
-                        , type: 'error'
+                        message: '未知错误',
+                        type: 'error'
                     })
             }
 

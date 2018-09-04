@@ -23,24 +23,24 @@
                 <template slot-scope="props">
                     <el-form class="table-expand" label-position="left" inline>
                         <el-form-item label="ID">
-                            <span>{{props.row.id}}</span>
+                            <span>{{props.row.userId}}</span>
                         </el-form-item>
-                        <el-form-item label="昵称">
+                       <!-- <el-form-item label="昵称">
                             <span>{{props.row.nickName}}</span>
-                        </el-form-item>
+                        </el-form-item>-->
                         <el-form-item label="用户名">
-                            <span>{{props.row.username}}</span>
+                            <span>{{props.row.userName}}</span>
                         </el-form-item>
                         <el-form-item label="角色">
-                            <span>{{props.row.role}}</span>
+                            <span>{{props.row.roleName}}</span>
                         </el-form-item>
                     </el-form>
                 </template>
             </el-table-column>
-            <el-table-column prop="id" label="ID"></el-table-column>
-            <el-table-column prop="username" label="用户名"></el-table-column>
-            <el-table-column prop="role" label="角色"></el-table-column>
-            <el-table-column prop="regeditTime" label="注册时间"></el-table-column>
+            <el-table-column prop="userId" label="ID"></el-table-column>
+            <el-table-column prop="userName" label="用户名"></el-table-column>
+            <el-table-column prop="roleName" label="角色"></el-table-column>
+            <el-table-column prop="createTime" label="注册时间"></el-table-column>
 
         </el-table>
         <el-pagination layout="total,sizes,prev,pager,next,jumper" :background="true" :pager-count="7" :page-sizes="[10,20,30,50,100]" :page-size="20" :total="50">
@@ -48,7 +48,11 @@
     </div>
 </template>
 <script>
-export default {
+    import user_url from "../../constant/api/user"
+    //import axios from "@/plugins/axios"
+
+    export default {
+
   data() {
     return {
       page: {
@@ -76,40 +80,29 @@ export default {
         search: "",
         searchTime: []
       },
-      users: [
-        {
-          id: 1,
-          username: "小刚",
-          nickName: "韶华",
-          role: "manage",
-          regeditTime: "2018-08-17 13:55:55"
-        },
-        {
-          id: 2,
-          username: "小花",
-          nickName: "青青倩影",
-          role: "user",
-          regeditTime: "2018-08-17 13:55:55"
-        }
-      ]
+      users: []
     };
   },
+    created(){
 
+    },
+        mounted(){
+            this.initPage()
+        },
   methods: {
+        initPage(){
+        let vm = this;
+            axios.get(user_url.userManagerPermissionGetAllUsernameAndRolename).then(function (data) {
+console.log(data)
+                vm.users=data;
+            })
+        },
     //直接查询
     search(type) {
       const h = this.$createElement;
 
       if (type == 1) {
-        this.$notify({
-          title: "具体搜索",
-          message: h(
-            "i",
-            { style: "color: teal" },
-            this.formData.searchType + "|" + this.formData.search
-          )
-        });
-      } else if (type == 2) {
+                } else if (type == 2) {
         this.$message(JSON.stringify(this.formData.searchTime));
       }
     }
