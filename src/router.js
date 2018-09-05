@@ -69,9 +69,9 @@ const router= new Router({
 })
 
 
-const SESSION_ID = "sessionid";
+const SESSION_ID = "h5_token";
 router.beforeEach((to,from,next)=>{
-    if(to.matched.some(record=>record.meta.requiresAuth)){
+   /* if(to.matched.some(record=>record.meta.requiresAuth)){
         if(getCookie(SESSION_ID))
             next()
         else
@@ -83,7 +83,7 @@ router.beforeEach((to,from,next)=>{
             })
     }else {
         next();
-    }
-
+    }*/
+next();
 })
 export default router;
