@@ -29,7 +29,6 @@
             ElFormItem,
             ElForm
         },
-
         data() {
             return {
                 role: {
@@ -53,8 +52,11 @@
                     if (valid) {
                         let param = "name:" + Base64.encode(self.role.name) + ";description:" + Base64.encode(self.role.description);
                         axios.post(roleApi.userManagerPermissionManagerAddRole + "&parameters=" + param).then(response => {
+                            self.role = {};
                             self.$emit('close-dialog');
+
                         }).catch(function () {
+                            self.role = {};
                             self.$emit('close-dialog');
                         })
 
