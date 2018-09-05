@@ -8,11 +8,11 @@
 
         <el-table :data="roles" stripe border highlight-current-row @current-change="selectedRow">
             <el-table-column prop="id" label="ID"></el-table-column>
-            <el-table-column prop="name" label="角色名"></el-table-column>
+            <el-table-column prop="name" label="角色名"  :show-overflow-tooltip="true"></el-table-column>
 
-            <el-table-column prop="description" label="描述"></el-table-column>
+            <el-table-column prop="description" label="描述"  :show-overflow-tooltip="true"></el-table-column>
 
-            <el-table-column prop="createTime" label="注册时间"></el-table-column>
+            <el-table-column prop="createTime" label="注册时间" :formatter="formatDate"  :show-overflow-tooltip="true"></el-table-column>
         </el-table>
         <el-pagination layout="total,sizes,prev,pager,next,jumper" background :page-sizes="[10,20,30,50,100]"
                        :page-size="20" :total="50">
@@ -42,6 +42,7 @@
     import RoleUpdateForm from "../../../components/roleManage/role/RoleUpdateForm.vue";
     import RoleAddForm from "../../../components/roleManage/role/RoleAddForm.vue";
     import roleApi from "../../../constant/api/role";
+    import {dateFormat} from "../../../utils/util";
     import ElDialog from "../../../../../examweb/node_modules/element-ui/packages/dialog/src/component.vue";
 
     export default {
@@ -109,7 +110,10 @@
                 let vm = this;
                 vm.page.selected = currentRow;
             },
-
+            //格式化日期
+            formatDate(row,col){
+                return dateFormat(new Date(row.createTime),"yyyy-MM-dd hh:mm:ss")
+            }
         }
     };
 </script>
