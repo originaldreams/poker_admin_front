@@ -32,7 +32,6 @@ _axios.interceptors.response.use(
     function (response) {
         if (response.status == 200) {
             let data = response.data;
-            console.log(JSON.stringify(data))
             switch (data.success) {
                 case 0:
                     return data.data;

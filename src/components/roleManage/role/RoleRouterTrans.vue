@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div>
         <el-transfer v-model="roleRouters" :data="routers" :props="{
       key: 'id',
       label: 'serviceName'
@@ -15,14 +15,14 @@
     export default {
         data() {
             return {
-                roleRouters: [1, 2],
+                roleRouters: [],
                 routers: []
             }
         },
         props: {
             role: {
                 type: Object,
-                default: null
+                default: {}
             },
         },
         components: {
@@ -39,20 +39,33 @@
                 let vm = this
                 if (vm.role) {
                     axios.get(router_url.userManagerPermissionGetAllRouters).then(function (data) {
-
                         vm.routers = data
+
+                    })
+                    let param = "roleId:" + Base64.encode(vm.role.id);
+                    axios.get(router_url.userManagerPermissionGetRoutersByRoleId + "&parameters=" + param).then(function (data) {
+                        if (data) {
+                            data.forEach(function (router) {
+                                vm.roleRouters.push(router.id);
+                            })
+                        }
 
                     })
 
                 }
-                if (vm.id) {
 
-                }
             },
             //提交数据
             submit() {
-                console.log(JSON.stringify(this.role));
-                self.$emit('close-dialog');
+                this.$message.info("暂未实现")
+            /*    let self = this;
+                let param = "id:" + Base64.encode(self.roleForm.id) + ";name:" + Base64.encode(self.roleForm.name) + ";description:" + Base64.encode(self.roleForm.description);
+                axios.post(roleApi.userManagerPermissionManagerUpdateRole + "&parameters=" + param).then(response => {
+                    self.$emit('close-dialog');
+                }).catch(function () {
+                    self.$emit('close-dialog');
+                })*/
+
             }
         }
     }
