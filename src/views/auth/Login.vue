@@ -12,10 +12,15 @@
             </el-form-item>
 
             <el-form-item>
-                <el-button type="primary" class="loginButton" @click="submit">登录</el-button>
+                <el-button type="primary" class="loginButton" @click="loginSubmit">登录</el-button>
             </el-form-item>
         </el-form>
 
+
+        <div>
+            没有账号？            <router-link to="/registe">马上注册</router-link>
+
+        </div>
     </div>
 
 </template>
@@ -43,14 +48,42 @@
                         {required: true, message: "请输入密码", trigger: "blur"},
                         {min: 6, message: "密码至少需要输入6位", trigger: "blur"}
                     ]
-                }
+                },
+                regForm: {},
+                regFormRules: {}
             };
         },
 
         methods: {
-            submit: function (formName) {
+            loginSubmit: function () {
                 let self = this;
                 this.$refs.loginForm.validate(valid => {
+                    if (valid) {
+                        let loginParams = new URLSearchParams(this.loginForm);
+                        axios.post(auth_url.login,
+                            loginParams
+                        ).then(response => {
+                            self.$message({
+                                showClose: true,
+                                message: "登录成功",
+                                type: "success"
+                            });
+                            self.$router.push("/");
+                        })
+
+                    } else {
+                        self.$message({
+                            showClose: true,
+                            message: "输入信息不完整",
+                            type: "warning"
+                        });
+                        return false;
+                    }
+                });
+            },
+            regSubmit: function () {
+                let self = this;
+                this.$refs.regeditForm.validate(valid => {
                     if (valid) {
                         let loginParams = new URLSearchParams(this.loginForm);
                         axios.post(auth_url.loginWithUserName,
@@ -74,7 +107,6 @@
                     }
                 });
             },
-
         }
     };
 </script>
