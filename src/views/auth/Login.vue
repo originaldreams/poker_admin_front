@@ -1,28 +1,18 @@
 <template>
     <div class="loginForm">
         <h3>登录</h3>
-        <el-form ref="LoginForm" :model="LoginForm" :rules="LoginFormRules" label-width="80px">
-            <el-form-item label="登录类型">
-                <el-select v-model="loginType">
-                    <el-option
-                            v-for="item in loginOptions"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value"
-                            :disabled="item.disabled">
-                    </el-option>
-                </el-select>
-            </el-form-item>
+        <el-form ref="loginForm" :model="loginForm" :rules="loginFormRules" label-width="80px">
+
             <el-form-item label="用户名" prop="username">
-                <el-input v-model="LoginForm.userName" class="input"></el-input>
+                <el-input v-model="loginForm.userName" class="input"></el-input>
             </el-form-item>
 
             <el-form-item label="密码" prop="password">
-                <el-input v-model="LoginForm.password" class="input" type="password"></el-input>
+                <el-input v-model="loginForm.password" class="input" type="password"></el-input>
             </el-form-item>
 
             <el-form-item>
-                <el-button type="primary" class="loginButton" @click="loginFormSubmit('LoginForm')">登录</el-button>
+                <el-button type="primary" class="loginButton" @click="submit">登录</el-button>
             </el-form-item>
         </el-form>
 
@@ -37,28 +27,15 @@
 
     import "url-search-params-polyfill";
 
-    const LOGIN_OPTIONS = [
-        {value: "loginWithUserName", label: "用户名登录"},
-        {value: "logonWithPhone", label: "手机号登录", disabled: true},
-        {value: "logonWithEmail", label: "Email登录", disabled: true}
-    ];
-
-    const SESSION_ID = "sessionid";
-    const CSRF_TOKEN = "csrftoken";
-    const SESSION_EXPIRE_DAY = 14;
-
-    // 暂未使用
-    const SESSION_PATH = "";
-
     export default {
         data() {
             return {
-                LoginForm: {
+                loginForm: {
                     userName: "",
                     password: ""
                 },
 
-                LoginFormRules: {
+                loginFormRules: {
                     userName: [
                         {required: true, message: "请输入用户名", trigger: "blur"}
                     ],
@@ -66,53 +43,38 @@
                         {required: true, message: "请输入密码", trigger: "blur"},
                         {min: 6, message: "密码至少需要输入6位", trigger: "blur"}
                     ]
-                },
-                loginType: LOGIN_OPTIONS[0].value,
-                loginOptions: LOGIN_OPTIONS
+                }
             };
         },
 
         methods: {
-            loginFormSubmit: function (formName) {
+            submit: function (formName) {
                 let self = this;
-                this.$refs[formName].validate(valid => {
+                this.$refs.loginForm.validate(valid => {
                     if (valid) {
-                        self.login();
+                        let loginParams = new URLSearchParams(this.loginForm);
+                        axios.post(auth_url.loginWithUserName,
+                            loginParams
+                        ).then(response => {
+                            self.$message({
+                                showClose: true,
+                                message: "登录成功",
+                                type: "success"
+                            });
+                            self.$router.push("/");
+                        })
+
                     } else {
                         self.$message({
                             showClose: true,
                             message: "输入信息不完整",
                             type: "warning"
                         });
-
                         return false;
                     }
                 });
             },
-            login: function () {
-                let self = this;
-                let loginParams = new URLSearchParams(this.LoginForm);
-                axios.post(auth_url.loginWithUserName,
-                    loginParams
-                ).then(response => {
-                    self.$message({
-                        showClose: true,
-                        message: "登录成功",
-                        type: "success"
-                    });
-                    //写入 Cookies
-                   setCookie(SESSION_ID, response.session_key, {
-                        expires: SESSION_EXPIRE_DAY
-                    });
-                   // localStorage.setItem("sessionid", response.session_key);
-                   // let redirect = decodeURIComponent(self.$route.query.redirect || "/");
-                    //跳转
-                    //self.$router.push({path: redirect}); //登录成功之后重定向到首页
-                    self.$router.push("/");
 
-                })
-
-            }
         }
     };
 </script>
