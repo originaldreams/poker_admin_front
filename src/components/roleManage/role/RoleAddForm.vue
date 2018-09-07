@@ -18,17 +18,10 @@
     </div>
 </template>
 <script>
-    import ElForm from "../../../../../examweb/node_modules/element-ui/packages/form/src/form.vue";
-    import ElFormItem from "../../../../../examweb/node_modules/element-ui/packages/form/src/form-item.vue";
-    import ElButton from "../../../../../examweb/node_modules/element-ui/packages/button/src/button.vue";
-    import roleApi from "../../../constant/api/role"
+     import roleApi from "../../../constant/api/role"
 
     export default {
-        components: {
-            ElButton,
-            ElFormItem,
-            ElForm
-        },
+
         data() {
             return {
                 role: {
