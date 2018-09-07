@@ -8,8 +8,6 @@
     </div>
 </template>
 <script>
-    import ElDialog from "../../../../node_modules/element-ui/packages/dialog/src/component.vue";
-    import ElButton from "../../../../node_modules/element-ui/packages/button/src/button.vue";
     import router_url from "../../../constant/api/router"
 
     export default {
@@ -25,10 +23,7 @@
                 default: {}
             },
         },
-        components: {
-            ElButton,
-            ElDialog
-        },
+
 
 
         mounted() {

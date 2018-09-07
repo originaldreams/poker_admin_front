@@ -37,18 +37,15 @@
     </div>
 </template>
 <script>
-    import ElButton from "../../../../node_modules/element-ui/packages/button/src/button.vue";
     import RoleRotuersTrans from "../../../components/roleManage/role/RoleRouterTrans.vue";
     import RoleUpdateForm from "../../../components/roleManage/role/RoleUpdateForm.vue";
     import RoleAddForm from "../../../components/roleManage/role/RoleAddForm.vue";
     import roleApi from "../../../constant/api/role";
     import {dateFormat} from "../../../utils/util";
-    import ElDialog from "../../../../../examweb/node_modules/element-ui/packages/dialog/src/component.vue";
 
     export default {
         components: {
-            ElDialog,
-            ElButton, RoleRotuersTrans, RoleAddForm, RoleUpdateForm
+         RoleRotuersTrans, RoleAddForm, RoleUpdateForm
         },
         data() {
             return {
