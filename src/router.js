@@ -1,16 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import {getCookie} from "./utils/cookie";
 // import Home from './views/Home.vue'
 // import About from './views/About.vue'
-import UserInformation from './views/userCenter/UserInformation.vue'
-import ResetPassword from './views/userCenter/ResetPassword.vue'
-import ResetPasswordForm from './components/userCenter/ResetPasswordForm.vue'
-import Login from './views/auth/Login.vue'
-import Main from './views/Main.vue'
-import UserList from './views/userManage/list.vue'
-import RouterList from './views/roleManage/router/list.vue'
-import RoleList from './views/roleManage/role/list.vue'
+import UserInformation from '@/views/userCenter/UserInformation.vue'
+import ResetPassword from '@/views/userCenter/ResetPassword.vue'
+import ResetPasswordForm from '@/components/userCenter/ResetPasswordForm.vue'
+import Login from '@/views/auth/Login.vue'
+import Register from '@/views/auth/Register.vue'
+
+import Main from '@/views/Main.vue'
+import UserList from '@/views/userManage/list.vue'
+import RouterList from '@/views/roleManage/router/list.vue'
+import RoleList from '@/views/roleManage/role/list.vue'
 
 Vue.use(Router)
 const router= new Router({
@@ -64,6 +65,10 @@ const router= new Router({
         {
             path: '/login',
             component: Login
+        },
+        {
+            path: '/register',
+            component: Register
         }
     ]
 })

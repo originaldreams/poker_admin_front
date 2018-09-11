@@ -1,16 +1,16 @@
 <!-- -->
 <template>
-  <div class="resetPassword">
+  <div class="main">
+      <div class="container">
       <h2>重置密码</h2>
       <reset-password-route></reset-password-route>
+      </div>
   </div>
 </template>
 
-<style scoped>
+<style >
 
-.resetPassword {
-  margin: -20px 20px 20px 40px;
-}
+
 
 </style>
 

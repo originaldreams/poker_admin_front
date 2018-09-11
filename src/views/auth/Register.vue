@@ -1,29 +1,28 @@
 <template>
-    <div class="registeForm">
+    <div class="registerForm">
         <h3>注册</h3>
-        <el-form ref="registeForm" :model="registeForm" :rules="registeFormRules" label-width="80px">
+        <el-form ref="registerForm" :model="registerForm" :rules="registerFormRules" label-width="80px">
 
             <el-form-item label="用户名" prop="userName">
-                <el-input v-model="registeForm.userName" class="input"></el-input>
+                <el-input v-model="registerForm.userName" class="input"></el-input>
             </el-form-item>
 
             <el-form-item label="密码" prop="password">
-                <el-input v-model="registeForm.password" class="input" type="password"></el-input>
+                <el-input v-model="registerForm.password" class="input" type="password"></el-input>
             </el-form-item>
             <el-form-item label="确认密码" prop="password2">
-                <el-input v-model="registeForm.password2" class="input" type="password"></el-input>
+                <el-input v-model="registerForm.password2" class="input" type="password"></el-input>
             </el-form-item>
             <el-form-item label="手机" prop="phone">
-                <el-input v-model="registeForm.phone" class="input"></el-input>
+                <el-input v-model="registerForm.phone" class="input"></el-input>
             </el-form-item>
             <el-form-item label="邮箱" prop="email">
-                <el-input v-model="registeForm.email" class="input"></el-input>
+                <el-input v-model="registerForm.email" class="input"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" class="registeButton" @click="registeSubmit">注册</el-button>
+                <el-button type="primary" class="registerButton" @click="registerSubmit">注册</el-button>
             </el-form-item>
         </el-form>
-
 
         <div>
             已有账号？
@@ -38,13 +37,12 @@
     import {setCookie, getCookie} from "@/utils/cookie";
     import authApi from "@/constant/api/auth";
 
-    import "url-search-params-polyfill";
 
     export default {
         data() {
             //密码对照
             var checkPassword = (rule, value, callback) => {
-                if (this.registeForm.password != this.registeForm.password2) {
+                if (this.registerForm.password != this.registerForm.password2) {
                     callback(new Error("两次输入密码不一致"));
                     return;
                 }
@@ -52,21 +50,23 @@
 
             }
             return {
-                registeForm: {
+                registerForm: {
                     userName: "",
                     password: "",
                     password2: "",
                     phone: "",
                     mail: ""
                 },
-                registeFormRules: {
+                registerFormRules: {
                     userName: [
-                        {required: true, message: "请输入用户名", trigger: "blur"}
+                        {required: true, message: "请输入用户名", trigger: "blur"},
+                        {min: 3, message: "用户名至少3位", trigger: "blur"},
+                        {max: 20, message: "用户名最多20位", trigger: "blur"}
                     ],
                     password: [
                         {required: true, message: "请输入密码", trigger: "blur"},
-
                         {min: 6, message: "密码至少需要输入6位", trigger: "blur"},
+                        {max: 20, message: "密码最多20位", trigger: "blur"},
                         {validator: checkPassword, trigger: "change"}
                     ],
                     password2: [
@@ -94,18 +94,18 @@
 
         methods: {
 
-            registeSubmit: function () {
+            registerSubmit: function () {
                 let self = this;
-                this.$refs.registeForm.validate(valid => {
+                this.$refs.registerForm.validate(valid => {
                     if (valid) {
                         //注册
-                        let register = {
-                            userName: self.registeForm.userName,
-                            password: self.registeForm.password,
-                            phone: self.registeForm.phone,
-                            mail: self.registeForm.mail
+                        let registerr = {
+                            userName: self.registerForm.userName,
+                            password: self.registerForm.password,
+                            phone: self.registerForm.phone,
+                            mail: self.registerForm.mail
                         }
-                        let loginParams = new URLSearchParams(register);
+                        let loginParams = new URLSearchParams(registerr);
                         axios.post(authApi.register, loginParams).then(response => {
                             self.$message({
                                 showClose: true,
@@ -131,7 +131,7 @@
 </script>
 
 <style scored>
-    .registeForm {
+    .registerForm {
         width: 400px;
         height: 600px;
         position: absolute;
@@ -153,7 +153,7 @@
         width: 400px;
     }
 
-    .registeButton {
+    .registerButton {
         margin-top: 20px;
         /* padding-top: 100px; */
         width: 150px;

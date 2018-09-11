@@ -18,8 +18,8 @@
 
 
         <div>
-            没有账号？            <router-link to="/registe">马上注册</router-link>
-
+            没有账号？
+            <router-link to="/register">马上注册</router-link>
         </div>
     </div>
 
@@ -30,7 +30,6 @@
     import {setCookie, getCookie} from "@/utils/cookie";
     import auth_url from "@/constant/api/auth";
 
-    import "url-search-params-polyfill";
 
     export default {
         data() {
@@ -42,11 +41,15 @@
 
                 loginFormRules: {
                     userName: [
-                        {required: true, message: "请输入用户名", trigger: "blur"}
+                        {required: true, message: "请输入用户名", trigger: "blur"},
+                        {min:3, message: "用户名至少3位", trigger: "blur"},
+                        {max:20, message: "用户名最多20位", trigger: "blur"}
                     ],
                     password: [
                         {required: true, message: "请输入密码", trigger: "blur"},
-                        {min: 6, message: "密码至少需要输入6位", trigger: "blur"}
+                        {min: 6, message: "密码至少需要输入6位", trigger: "blur"},
+                        {max:20, message: "密码最多20位", trigger: "blur"}
+
                     ]
                 },
                 regForm: {},
@@ -81,37 +84,11 @@
                     }
                 });
             },
-            regSubmit: function () {
-                let self = this;
-                this.$refs.regeditForm.validate(valid => {
-                    if (valid) {
-                        let loginParams = new URLSearchParams(this.loginForm);
-                        axios.post(auth_url.loginWithUserName,
-                            loginParams
-                        ).then(response => {
-                            self.$message({
-                                showClose: true,
-                                message: "登录成功",
-                                type: "success"
-                            });
-                            self.$router.push("/");
-                        })
-
-                    } else {
-                        self.$message({
-                            showClose: true,
-                            message: "输入信息不完整",
-                            type: "warning"
-                        });
-                        return false;
-                    }
-                });
-            },
         }
     };
 </script>
 
-<style scored>
+<style>
     .loginForm {
         width: 400px;
         height: 300px;
@@ -121,7 +98,6 @@
         bottom: 0;
         left: 0;
         margin: auto;
-
         /* 背景 */
         padding: 20px 30px 20px 30px;
         background-color: #f7f7f9;

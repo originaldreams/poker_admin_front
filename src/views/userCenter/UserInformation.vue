@@ -1,21 +1,17 @@
 <!-- -->
 <template>
-  <div class="information">
+  <div class="main">
     <h2>用户资料</h2>
-    <div>
+
+    <div class="container">
       <user-avatar></user-avatar>
-    </div>
-    <!-- 表单 -->
-    <div>
       <user-information-form></user-information-form>
     </div>
   </div>
 </template>
 
 <style scoped>
-.information {
-  margin: -20px 20px 20px 40px;
-}
+
 </style>
 
 <script>

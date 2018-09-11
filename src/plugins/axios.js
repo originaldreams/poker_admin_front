@@ -2,7 +2,7 @@
 
 import Vue from 'vue';
 import axios from "axios";
-import {Message} from "element-ui";
+import {Loading, Message} from "element-ui";
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
@@ -15,14 +15,15 @@ let config = {
 };
 
 const _axios = axios.create(config);
-
+var loadinginstace;
 _axios.interceptors.request.use(
     function (config) {
         // Do something before request is sent
+        loadinginstace = Loading.service({fullscreen: true})
         return config;
     },
     function (error) {
-        // Do something with request error
+        loadinginstace.close();
         return Promise.reject(error);
     }
 );
@@ -30,54 +31,69 @@ _axios.interceptors.request.use(
 // Add a response interceptor
 _axios.interceptors.response.use(
     function (response) {
+        loadinginstace.close();
         if (response.status == 200) {
             let data = response.data;
             switch (data.success) {
+                //如果正常
                 case 0:
                     return data.data;
-                    break;
+                //如果异常
                 case 1:
-                    Message({
+                    Promise.rejected(Message({
                         showClose: true,
                         message: data.message,
                         type: "error"
-                    })
+                    }))
                     break;
+                //未知情况
                 default:
-                    Message({
+
+                    Promise.rejected(Message({
                         showClose: true,
                         message: "未知状态",
                         type: "error"
-                    });
-                    break;
+                    }))
             }
         }
 
     },
     function (error) {
+        loadinginstace.close();
+        //异常处理
         if (error.response) {
             let response = error.response
             switch (response.status) {
+                //服务器异常
                 case 500:
-                    Message({
+                    Promise.rejected(Message({
                         showClose: true,
                         message: '请求异常,请重试',
                         type: "error"
-                    })
+                    }))
                     break;
+                case 400:
+                    Promise.rejected(Message({
+                        showClose: true,
+                        message: '请求参数异常，请重试',
+                        type: "error"
+                    }))
+
+                    break;
+                //找不到接口
                 case 403:
-                    Message({
+                    Promise.rejected(Message({
                         showClose: true,
                         message: response.data.message,
                         type: 'error'
-                    })
+                    }))
                     break;
                 default:
-                    Message({
+                    Promise.rejected(Message({
                         showClose: true,
                         message: '未知错误',
                         type: 'error'
-                    })
+                    }))
             }
 
         }
